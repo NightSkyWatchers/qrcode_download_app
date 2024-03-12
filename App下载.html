@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App下载</title>
+    <script>
+        // 是否在微信中
+        function isInWeixin() { 
+            return /MicroMessenger|WeXin|WeChat/g.test(navigator.userAgent);
+        }
+
+        // 是否在QQ中
+        function isInQQ() {
+            return /QQ/g.test(navigator.userAgent);
+        }
+
+        // 是否在支付宝中
+        function isInAliPay() {
+            return /Alipay/g.test(navigator.userAgent);
+        }
+
+        // 是否ios终端
+        function isIOS() { 
+            return !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        }
+
+        // android终端
+        function isAndroid() { 
+            return navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; 
+        }
+
+        function judgeBrand(sUserAgent) {
+            const isHuawei = sUserAgent.match(/huawei/i) == "huawei";
+            const isHarmony = sUserAgent.match(/harmonyos/i) == "harmonyos";
+            const isHonor = sUserAgent.match(/honor/i) == "honor";
+            const isOppo = sUserAgent.match(/oppo/i) == "oppo";
+            const isOppoR15 = sUserAgent.match(/pacm00/i) == "pacm00";
+            const isVivo = sUserAgent.match(/vivo/i) == "vivo";
+            const isXiaomi = sUserAgent.match(/mi\s/i) == "mi ";
+            const isXiaomiNew = sUserAgent.match(/xiaomi/i) == "xiaomi";
+            const isXiaomi2s = sUserAgent.match(/mix\s/i) == "mix ";
+            const isRedmi = sUserAgent.match(/redmi/i) == "redmi";
+
+            if (isHuawei || isHarmony) {
+                return 'huawei';
+            } else if (isHonor) {
+                return 'honor';
+            } else if (isOppo || isOppoR15) {
+                return 'oppo';
+            } else if (isVivo) {
+                return 'vivo';
+            } else if (isXiaomi || isRedmi || isXiaomi2s || isXiaomiNew) {
+                return 'xiaomi';
+            } else {
+                return 'default';
+            }
+        }
+
+        const appId = "包名/BundleID";
+        const downloadUrl = "https://oss.familytea.com.cn/app/app-release.apk";
+        const downloadMsg = `浏览器会自动跳转到应用市场，若未跳转，说明无法判断你的手机品牌或者不支持的手机品牌，请点击<a href="${downloadUrl}">连接</a>直接下载App。`;
+    </script>
+</head>
+<body data-new-gr-c-s-check-loaded="14.1155.0" data-gr-ext-installed="">
+    <div id="not_browser" style="display: none;">
+        <p>点击右上角三个点，建议选择手机默认浏览器打开，以便跳转对应的应用商店。</p>
+    </div>
+    <div id="content">
+    
+        <p>华为、小米、荣耀、OPPO、VIVO手机会自动跳转应用商店，若跳转失败，则说明当前浏览器无法判断您的手机品牌或者为不支持的手机品牌，请点击下面图标直接下载App。</p>
+        <div style="text-align: center;">
+			// 
+            <a href="https://oss.familytea.com.cn/app/app-release.apk">
+                <img src="./App下载_files/app_logo.jpeg" alt="App图标">
+                <div>点击下载</div>
+            </a>
+        </div>
+    </div>
+    <script>
+        // 输出调试信息
+        // document.write(navigator.userAgent + "<br/>");
+
+        // 在app内嵌浏览器中
+        if (isInWeixin() === true || isInQQ() === true || isInAliPay() === true) {
+            const contentEl = document.querySelector("#content");
+            const notBrowserEl = document.querySelector("#not_browser");
+            contentEl.style.display = "none";
+            notBrowserEl.style.display = "block";
+        } 
+        // ios系统，跳转AppStore
+        else if (isIOS() === true) { 
+            document.write("iOS");
+            // 跳转苹果商店
+            window.location.replace(`https://apps.apple.com/cn/app/%E5%AE%B6%E9%95%BF%E8%8C%B6%E9%A6%86/id6467468494`)
+        } 
+        // 安卓
+        else if (isAndroid() === true) {
+            // 判断品牌
+            const brand = judgeBrand(navigator.userAgent.toLowerCase()); 
+            // 根据手机品牌跳转不同商店
+            if (brand === "xiaomi") {
+                window.location.replace(`mimarket://details?id=${appId}`);
+            } else if (brand === "huawei") {
+                window.location.replace(`appmarket://details?id=${appId}`);
+            } else if (brand === "vivo") {
+                window.location.replace(`vivomarket://details?id=${appId}`);
+            } else if (brand === "oppo") {
+                window.location.replace(`oppomarket://details?packagename=${appId}`);
+            } else if (brand === "honor") {
+                window.location.replace(`market://details?id=${appId}`);
+            }
+        }
+    </script>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
